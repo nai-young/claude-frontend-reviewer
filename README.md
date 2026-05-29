@@ -32,15 +32,12 @@ Review React and Next.js components with AI-powered analysis.
 
 ### Dashboard
 
-![Dashboard](docs/dashboard.png)
+![Dashboard](docs/dashboard-main.png)
+![Dashboard](docs/dashboard-review.png)
 
 ### Claude Analysis
 
 ![Analysis](docs/analysis.png)
-
-### GitHub Pull Request Review
-
-![PR Review](docs/pr-review.png)
 
 ---
 
