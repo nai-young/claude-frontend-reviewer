@@ -127,6 +127,25 @@ Examples:
 
 ---
 
+## Real Workflow Example
+
+A complete Claude-assisted workflow can be seen in:
+
+- :contentReference[oaicite:1]{index=1}
+
+The workflow includes:
+
+1. Code changes
+2. Pull Request creation
+3. AI-assisted review
+4. Accessibility recommendations
+5. Code improvements
+6. Merge-ready implementation
+
+This demonstrates how Claude can be integrated into day-to-day engineering processes rather than being used solely for code generation.
+
+---
+
 ## Screenshots
 
 ### Claude PR Analysis
