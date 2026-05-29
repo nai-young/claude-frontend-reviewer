@@ -4,6 +4,29 @@ A practical showcase of integrating Claude into real-world software engineering 
 
 Rather than focusing on AI-generated code, this project explores how Claude can be embedded throughout the development lifecycle to improve code quality, developer productivity, documentation, and collaboration.
 
+---
+
+## Real Workflow Example
+
+A complete Claude-assisted workflow can be seen in:
+
+🚀 **Claude-assisted Pull Request**
+
+[View Pull Request #2](https://github.com/nai-young/claude-frontend-reviewer/pull/2)
+
+The workflow includes:
+
+1. Code changes
+2. Pull Request creation
+3. AI-assisted review
+4. Accessibility recommendations
+5. Code improvements
+6. Merge-ready implementation
+
+This demonstrates how Claude can be integrated into day-to-day engineering processes rather than being used solely for code generation.
+
+---
+
 ## What This Demonstrates
 
 - Claude Code integration
@@ -124,27 +147,6 @@ Examples:
 ```txt
 @claude generate a better PR title and description
 ```
-
----
-
-## Real Workflow Example
-
-A complete Claude-assisted workflow can be seen in:
-
-🚀 **Claude-assisted Pull Request**
-
-[View Pull Request #2](https://github.com/nai-young/claude-frontend-reviewer/pull/2)
-
-The workflow includes:
-
-1. Code changes
-2. Pull Request creation
-3. AI-assisted review
-4. Accessibility recommendations
-5. Code improvements
-6. Merge-ready implementation
-
-This demonstrates how Claude can be integrated into day-to-day engineering processes rather than being used solely for code generation.
 
 ---
 
