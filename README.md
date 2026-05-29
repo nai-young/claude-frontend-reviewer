@@ -131,7 +131,9 @@ Examples:
 
 A complete Claude-assisted workflow can be seen in:
 
-- :contentReference[oaicite:1]{index=1}
+🚀 **Claude-assisted Pull Request**
+
+[View Pull Request #2](https://github.com/nai-young/claude-frontend-reviewer/pull/2)
 
 The workflow includes:
 
