@@ -8,17 +8,5 @@
  */
 
 export function BadButton() {
-  return (
-    <div
-      onClick={() => alert("clicked")}
-      style={{
-        background: "blue",
-        color: "white",
-        padding: "10px",
-        cursor: "pointer",
-      }}
-    >
-      Submit
-    </div>
-  );
+  return <div onClick={() => alert("clicked")}>Submit</div>;
 }
