@@ -6,32 +6,42 @@ const anthropic = new Anthropic({
 });
 
 export async function POST(req: Request) {
-  const { code } = await req.json();
+  try {
+    const { code } = await req.json();
 
-  const message = await anthropic.messages.create({
-    model: "claude-3-5-sonnet-latest",
-    max_tokens: 1200,
-    messages: [
+    if (!process.env.ANTHROPIC_API_KEY) {
+      return NextResponse.json(
+        { error: "Missing ANTHROPIC_API_KEY" },
+        { status: 500 }
+      );
+    }
+
+    const message = await anthropic.messages.create({
+      model: "claude-haiku-4-5-20251001",
+      max_tokens: 700,
+      messages: [
+        {
+          role: "user",
+          content: `Review this React component briefly:\n\n${code}`,
+        },
+      ],
+    });
+
+    return NextResponse.json({
+      result:
+        message.content[0].type === "text"
+          ? message.content[0].text
+          : "No text response",
+    });
+  } catch (error) {
+    return NextResponse.json(
       {
-        role: "user",
-        content: `
-Review this React/Next.js component.
-
-Focus on:
-- accessibility
-- performance
-- TypeScript quality
-- maintainability
-- tests
-
-Code:
-${code}
-        `,
+        error:
+          error instanceof Error
+            ? error.message
+            : "Unknown API error",
       },
-    ],
-  });
-
-  return NextResponse.json({
-    result: message.content,
-  });
+      { status: 500 }
+    );
+  }
 }

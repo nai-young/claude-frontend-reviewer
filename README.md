@@ -1,162 +1,159 @@
 # Claude Frontend Reviewer
 
-AI-powered code review platform for React and Next.js applications.
+A practical showcase of integrating Claude into real-world software engineering workflows.
 
-Analyze components with Claude to identify accessibility issues, performance bottlenecks, maintainability concerns, and testing gaps.
+Rather than focusing on AI-generated code, this project explores how Claude can be embedded throughout the development lifecycle to improve code quality, developer productivity, documentation, and collaboration.
 
-![Next.js](https://img.shields.io/badge/Next.js-000?logo=nextdotjs)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript)
-![Claude](https://img.shields.io/badge/Claude-AI-orange)
-![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=githubactions)
+## What This Demonstrates
+
+- Claude Code integration
+- Project-aware AI through `CLAUDE.md`
+- Custom Claude Skills
+- Pull Request automation
+- AI-assisted code reviews
+- GitHub Actions workflows
+- Developer Experience (DX) optimization
+- AI-enhanced engineering processes
 
 ---
 
-## Demo
+## Why This Project
 
-Review React and Next.js components with AI-powered analysis.
+Most AI demos stop at generating code.
 
-### Features
+This project focuses on a more realistic use case: integrating Claude as a development assistant that understands project standards, reviews code, improves Pull Requests, generates documentation, and supports engineering workflows.
 
-- 🔍 React component audits
-- ♿ Accessibility reviews (WCAG-focused)
-- ⚡ Performance analysis
-- 🧹 Refactoring suggestions
-- 🧪 Testing recommendations
-- 🤖 Claude Skills integration
-- 🔄 GitHub Actions automation
-- 📝 Pull Request reviews
+The objective is to demonstrate practical AI engineering and developer tooling skills rather than simply consuming an AI API.
+
+---
+
+## Claude Configuration
+
+### Project Context
+
+The repository includes a dedicated `CLAUDE.md` file containing:
+
+- Coding standards
+- Accessibility requirements
+- Architecture guidelines
+- Testing expectations
+- Code review criteria
+
+This allows Claude to operate with project-specific context and behave like a team-aware engineering assistant.
+
+---
+
+## Custom Skills
+
+### Pull Request Assistant
+
+Generates:
+
+- Conventional Commit titles
+- Pull Request descriptions
+- Review summaries
+- Suggested labels
+
+```txt
+.claude/skills/pull-request-assistant
+```
+
+---
+
+### Frontend Review
+
+Analyzes:
+
+- React patterns
+- TypeScript quality
+- Accessibility
+- Performance
+- Maintainability
+
+```txt
+.claude/skills/frontend-review
+```
+
+---
+
+### Accessibility Audit
+
+Reviews:
+
+- WCAG compliance
+- Semantic HTML
+- Keyboard navigation
+- ARIA usage
+- Form accessibility
+
+```txt
+.claude/skills/accessibility-audit
+```
+
+---
+
+### React Refactoring
+
+Suggests improvements for:
+
+- Component structure
+- Reusability
+- Separation of concerns
+- Performance optimization
+
+```txt
+.claude/skills/refactor-react-component
+```
+
+---
+
+## GitHub Integration
+
+Claude is integrated into Pull Request workflows through GitHub Actions.
+
+Examples:
+
+```txt
+@claude review only examples/bad-button.tsx
+```
+
+```txt
+@claude suggest improvements for accessibility
+```
+
+```txt
+@claude generate a better PR title and description
+```
 
 ---
 
 ## Screenshots
 
-### Dashboard
-
-![Dashboard](docs/dashboard.png)
-
-### Claude Analysis
+### Claude PR Analysis
 
 ![Analysis](docs/analysis.png)
 
-### GitHub Pull Request Review
+### Claude Pull Request Assistant
 
-![PR Review](docs/pr-review.png)
+`/pull-request-assistant` Custom skill generating optimized Pull Request titles, descriptions and summaries.
 
----
+![Pull Request Assistant](docs/pull-request-assistant.png)
 
-## Architecture
+### Architecture
 
 ![Architecture](docs/architecture.png)
 
-### Flow
+### Application Dashboard
 
-```txt
-User Component
-      │
-      ▼
-Next.js Frontend
-      │
-      ▼
-API Route
-      │
-      ▼
-Claude API
-      │
-      ▼
-Review Engine
-      │
-      ▼
-Dashboard Results
-```
+![Dashboard](docs/dashboard-main.png)
+
+### Review Results
+
+![Review Results](docs/dashboard-review.png)
 
 ---
 
-## Example Review
-
-### Input
-
-```tsx
-export function BadButton() {
-  return <div onClick={() => alert("clicked")}>Submit</div>;
-}
-```
-
-### Claude Findings
-
-#### Accessibility
-
-- Interactive element should be a button
-- Keyboard navigation not supported
-
-#### Maintainability
-
-- Inline implementation
-- Not reusable
-
-#### Suggested Fix
-
-```tsx
-export function Button() {
-  return <button type="button">Submit</button>;
-}
-```
-
----
-
-## Claude Integration
-
-### CLAUDE.md
-
-Project-wide development standards:
-
-- TypeScript strict mode
-- Accessibility-first development
-- Component architecture rules
-- Testing requirements
-
-### Custom Skills
-
-```txt
-.claude/
-└── skills/
-    ├── frontend-review/
-    ├── accessibility-audit/
-    └── refactor-react-component/
-```
-
-Examples:
-
-- Frontend Review
-- Accessibility Audit
-- React Refactoring
-- Test Generation
-
----
-
-## GitHub Automation
-
-### Claude Code
-
-Trigger AI reviews directly from Pull Requests:
-
-```txt
-@claude review this component
-```
-
-Example use cases:
-
-- Accessibility reviews
-- Refactor suggestions
-- Architecture feedback
-- Test recommendations
-
-### CodeRabbit
-
-Automated AI-assisted Pull Request reviews.
-
----
-
-## Tech Stack
+## Technical Stack
 
 ### Frontend
 
@@ -164,125 +161,34 @@ Automated AI-assisted Pull Request reviews.
 - React
 - TypeScript
 - Tailwind CSS
+- shadcn/ui
 
-### AI
+### AI Engineering
 
 - Claude API
 - Claude Code
+- CLAUDE.md
 - Custom Claude Skills
-
-### Quality
-
-- ESLint
-- Vitest
-- Playwright
+- Prompt Engineering
+- Workflow Automation
 
 ### DevOps
 
 - GitHub Actions
-- CodeRabbit
+- Pull Request Automation
+- CI/CD Integration
 
 ---
 
-## Project Structure
+## Key Takeaway
 
-```txt
-claude-frontend-reviewer/
+This project demonstrates how Claude can be integrated into a professional engineering workflow through:
 
-├── .claude/
-│   └── skills/
-│
-├── .github/
-│   └── workflows/
-│       ├── ci.yml
-│       └── claude.yml
-│
-├── app/
-│   ├── api/
-│   │   └── review/
-│   └── page.tsx
-│
-├── docs/
-│   ├── architecture.png
-│   ├── dashboard.png
-│   ├── analysis.png
-│   └── pr-review.png
-│
-├── examples/
-│   ├── bad-button.tsx
-│   ├── inaccessible-form.tsx
-│   ├── slow-list.tsx
-│   └── bad-modal.tsx
-│
-├── CLAUDE.md
-└── README.md
-```
+- Project-aware instructions
+- Custom Skills
+- Pull Request optimization
+- Code review automation
+- Documentation generation
+- Developer productivity tooling
 
----
-
-## Local Development
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Create environment variables:
-
-```bash
-cp .env.example .env.local
-```
-
-Add your API key:
-
-```env
-ANTHROPIC_API_KEY=your_api_key
-```
-
-Run development server:
-
-```bash
-npm run dev
-```
-
----
-
-## CI/CD Pipeline
-
-Automated checks:
-
-- ESLint
-- TypeScript
-- Unit Tests
-- Build Verification
-- Claude Review Workflows
-- CodeRabbit Reviews
-
----
-
-## Portfolio Highlights
-
-This project demonstrates:
-
-- Modern React architecture
-- AI-assisted development workflows
-- Claude Skills implementation
-- Claude Code integration
-- GitHub Actions automation
-- Accessibility-first engineering
-- Testing strategy design
-- CI/CD best practices
-- Developer Experience (DX)
-
----
-
-## Future Improvements
-
-- Repository-wide analysis
-- Multi-file reviews
-- Design System audits
-- Storybook integration
-- Lighthouse scoring
-- AI-generated Pull Requests
-- MCP integrations
+The focus is not on generating code, but on augmenting the software development lifecycle with AI-powered workflows.

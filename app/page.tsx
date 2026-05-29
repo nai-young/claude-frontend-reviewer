@@ -1,12 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
+import { Separator } from "@/components/ui/separator";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+
+const sampleCode = `export function BadButton() {
+  return (
+    <div onClick={() => alert("clicked")}>
+      Submit
+    </div>
+  );
+}`;
 
 export default function Home() {
-  const [code, setCode] = useState<string>("");
+  const [code, setCode] = useState<string>(sampleCode);
   const [result, setResult] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  async function reviewCode() {
+  const reviewCode = useCallback(async (): Promise<void> => {
+    setIsLoading(true);
+    setResult("");
+
     try {
       const response = await fetch("/api/review", {
         method: "POST",
@@ -16,38 +40,170 @@ export default function Home() {
         body: JSON.stringify({ code }),
       });
 
-      const data = await response.json();
+      const text = await response.text();
+
+      if (!response.ok) {
+        throw new Error(text || `Request failed with ${response.status}`);
+      }
+
+      const data = JSON.parse(text);
       setResult(data.result);
     } catch (error) {
-      if (error instanceof Error) {
-        console.error("Error reviewing code:", error.message);
-      } else {
-        console.error("Unknown error reviewing code:", error);
-      }
+      setResult(
+        error instanceof Error ? `Error: ${error.message}` : "Unknown error",
+      );
+    } finally {
+      setIsLoading(false);
     }
-  }
+  }, [code]);
 
   return (
-    <main className="mx-auto max-w-5xl p-8 space-y-6">
-      <h1 className="text-3xl font-bold">Claude Frontend Reviewer</h1>
+    <main className="min-h-screen bg-background">
+      <section className="mx-auto max-w-7xl px-6 py-10">
+        <header className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-4">
+            <Badge variant="secondary">AI-powered React reviews</Badge>
 
-      <textarea
-        className="w-full h-80 rounded border p-4 font-mono"
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-        placeholder="Paste a React component here..."
-      />
+            <div>
+              <h1 className="max-w-3xl text-4xl font-bold tracking-tight md:text-6xl">
+                Claude Frontend Reviewer
+              </h1>
 
-      <button
-        onClick={reviewCode}
-        className="rounded bg-black px-4 py-2 text-white"
-      >
-        Review with Claude
-      </button>
+              <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
+                Analyze React and Next.js components for accessibility,
+                performance, maintainability and testing opportunities.
+              </p>
+            </div>
+          </div>
 
-      <pre className="whitespace-pre-wrap rounded bg-gray-100 p-4">
-        {result}
-      </pre>
+          <div className="grid grid-cols-2 gap-3 text-sm md:grid-cols-4">
+            {["A11y", "Perf", "DX", "Tests"].map((item) => (
+              <Card key={item} className="min-w-24 text-center">
+                <CardContent className="p-4">
+                  <p className="text-2xl font-bold">AI</p>
+                  <p className="text-muted-foreground">{item}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </header>
+
+        <section className="grid gap-6 lg:grid-cols-[1fr_420px]">
+          <Card>
+            <CardHeader className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <CardTitle>Component Input</CardTitle>
+                <CardDescription>
+                  Paste a React component and run a Claude review.
+                </CardDescription>
+              </div>
+
+              <Button variant="outline" onClick={() => setCode(sampleCode)}>
+                Load demo
+              </Button>
+            </CardHeader>
+
+            <CardContent className="space-y-4">
+              <Textarea
+                className="min-h-50 resize-none font-mono text-sm"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                placeholder="Paste your React component here..."
+              />
+
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-sm text-muted-foreground">
+                  Reviews are focused on frontend quality, not backend logic.
+                </p>
+
+                <Button
+                  onClick={reviewCode}
+                  disabled={isLoading || !code.trim()}
+                  size="lg"
+                >
+                  {isLoading ? "Reviewing..." : "Review with Claude"}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          <aside className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Review Focus</CardTitle>
+                <CardDescription>
+                  Claude checks frontend quality across four areas.
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent className="space-y-3">
+                {[
+                  ["Accessibility", "Semantic HTML, labels, keyboard support"],
+                  ["Performance", "Rendering, keys, memoization"],
+                  ["Maintainability", "Component structure and readability"],
+                  ["Testing", "Useful unit and integration test ideas"],
+                ].map(([title, desc]) => (
+                  <Card key={title} className="bg-muted/40">
+                    <CardContent>
+                      <p className="font-medium">{title}</p>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {desc}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Alert>
+              <AlertTitle>Portfolio Highlights</AlertTitle>
+              <AlertDescription>
+                Claude API, Claude Skills-ready structure, GitHub Actions and
+                AI-assisted code review UX.
+              </AlertDescription>
+            </Alert>
+          </aside>
+        </section>
+
+        <Card className="mt-6">
+          <CardHeader className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <CardTitle>Claude Analysis</CardTitle>
+              <CardDescription>
+                Review results will appear here after Claude analyzes your
+                component.
+              </CardDescription>
+            </div>
+
+            {result && <Badge variant="secondary">Completed</Badge>}
+          </CardHeader>
+
+          <CardContent>
+            <Separator className="mb-4" />
+
+            <div className="min-h-72 rounded-lg border bg-muted/40 p-5">
+              {isLoading ? (
+                <div className="flex h-72 items-center justify-center">
+                  <div className="text-center">
+                    <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                    <p className="text-muted-foreground">
+                      Claude is reviewing...
+                    </p>
+                  </div>
+                </div>
+              ) : result ? (
+                <pre className="whitespace-pre-wrap text-sm leading-6">
+                  {result}
+                </pre>
+              ) : (
+                <div className="flex h-72 items-center justify-center text-center text-muted-foreground">
+                  Paste a component and run a review to see AI feedback.
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      </section>
     </main>
   );
 }
