@@ -1,49 +1,66 @@
-/*
- * This component is deliberately flawed for a Claude-assisted code review demo.
- * It contains real issues across accessibility, performance, TypeScript, and
- * React best practices — making it an ideal candidate for AI review.
- */
+"use client";
 
-export function UserCard({ data }: any) {
-  // Inline handler makes testing and readability harder
-  const handleClick = () => {
-    console.log("clicked");
-  };
+import { useCallback } from "react";
+import { Button } from "@/components/ui/button";
 
-  // Mutating state directly — React anti-pattern
-  data.name = data.name.toUpperCase();
+interface User {
+  id: string;
+  name: string;
+  avatar: string;
+  bio: string;
+  tags: string[];
+}
+
+interface UserCardProps {
+  data: User;
+  onDelete?: (id: string) => void;
+}
+
+export function UserCard({ data, onDelete }: UserCardProps) {
+  const displayName = data.name.toUpperCase();
+
+  const handleDelete = useCallback(() => {
+    if (typeof window !== "undefined" && window.confirm("Delete this user?")) {
+      onDelete?.(data.id);
+    }
+  }, [data.id, onDelete]);
 
   return (
-    <div className="card">
-      {/* Missing alt text for screen readers */}
-      <img src={data.avatar} />
+    <div className="rounded-xl border bg-card p-6 text-card-foreground shadow-sm">
+      <div className="flex items-center gap-4">
+        <img
+          src={data.avatar}
+          alt={`Avatar of ${data.name}`}
+          className="h-12 w-12 rounded-full object-cover"
+        />
 
-      {/* Non-semantic interactive element: div used as a button */}
-      <div onClick={handleClick} style={{ cursor: "pointer" }}>
-        {data.name}
+        <div className="flex-1">
+          <h3 className="font-semibold">{displayName}</h3>
+          <p className="mt-1 text-sm text-muted-foreground">{data.bio}</p>
+        </div>
       </div>
 
-      {/* Keyboard trap: div with onClick lacks keyboard support */}
-      <div
-        onClick={() => {
-          if (confirm("Delete?")) {
-            // Side effect inside render logic
-            fetch(`/api/users/${data.id}`, { method: "DELETE" });
-          }
-        }}
-      >
-        Delete
+      <div className="mt-4 flex flex-wrap gap-2">
+        {data.tags.map((tag) => (
+          <span
+            key={tag}
+            className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground"
+          >
+            {tag}
+          </span>
+        ))}
       </div>
 
-      {/* Inline styles instead of utility classes */}
-      <div style={{ marginTop: "8px", color: "#666" }}>
-        {data.bio}
+      <div className="mt-4 flex justify-end">
+        <Button
+          variant="destructive"
+          size="sm"
+          onClick={handleDelete}
+          aria-label={`Delete user ${data.name}`}
+        >
+          Delete
+        </Button>
       </div>
-
-      {/* Performance issue: random key on every render */}
-      {data.tags.map((tag: string) => (
-        <span key={Math.random()}>{tag}</span>
-      ))}
     </div>
   );
 }
