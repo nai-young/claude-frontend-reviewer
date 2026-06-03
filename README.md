@@ -24,7 +24,6 @@ The objective is to demonstrate practical AI engineering and developer tooling s
 - **Pull Request automation** with GitHub Actions
 - AI-assisted code reviews via `@claude` comments
 - **Lighthouse CI** for performance and accessibility budgets
-- **Bundle size monitoring** with size-limit
 - **Conventional Commits** enforcement
 - **PR Labeler** automation
 - Developer Experience (DX) optimization
@@ -71,7 +70,6 @@ All skills are located in `.claude/skills/` and ready to use with Claude Code.
 | **PR Labeler**           | PR opened/edited    | Auto-assign labels based on changed files                   |
 | **Conventional Commits** | PR opened/edited    | Validate PR title follows Conventional Commits              |
 | **Lighthouse CI**        | PR / push to `main` | Performance, accessibility, best-practices, and SEO scoring |
-| **Bundle Size**          | PR to `main`        | Monitor bundle size changes with `size-limit`               |
 | **Deploy Preview**       | PR opened           | Post Vercel preview URL as PR comment                       |
 
 ### AI Review Examples
@@ -177,10 +175,9 @@ The frontend is a fully functional review dashboard:
 
 ### DevOps & Quality
 
-- GitHub Actions (7 workflows)
+- GitHub Actions (6 workflows)
 - Pull Request Automation
 - Lighthouse CI
-- Bundle Size Monitoring (`size-limit`)
 - Conventional Commits enforcement
 - Auto-labeling
 - CODEOWNERS
@@ -220,6 +217,6 @@ This project demonstrates how Claude can be integrated into a professional engin
 - Code review automation
 - Documentation generation
 - Developer productivity tooling
-- **Quality gates** (tests, Lighthouse, bundle size, commit conventions)
+- **Quality gates** (tests, Lighthouse, commit conventions)
 
 The focus is not on generating code, but on augmenting the software development lifecycle with AI-powered workflows.
