@@ -70,7 +70,6 @@ All skills are located in `.claude/skills/` and ready to use with Claude Code.
 | **PR Labeler**           | PR opened/edited    | Auto-assign labels based on changed files                   |
 | **Conventional Commits** | PR opened/edited    | Validate PR title follows Conventional Commits              |
 | **Lighthouse CI**        | PR / push to `main` | Performance, accessibility, best-practices, and SEO scoring |
-| **Deploy Preview**       | PR opened           | Post Vercel preview URL as PR comment                       |
 
 ### AI Review Examples
 
@@ -104,8 +103,7 @@ This PR demonstrates the entire feature set:
 4. **AI suggestions** — Accessibility, performance, TypeScript fixes
 5. **CI checks** — Typecheck, lint, tests, build
 6. **Lighthouse CI** — Performance and accessibility scoring
-7. **Deploy Preview** — Automatic Vercel preview link
-8. **CODEOWNERS** — Review assignment
+7. **CODEOWNERS** — Review assignment
 
 This demonstrates how Claude can be integrated into day-to-day engineering processes rather than being used solely for code generation.
 
@@ -181,7 +179,7 @@ The frontend is a fully functional review dashboard:
 
 ### DevOps & Quality
 
-- GitHub Actions (6 workflows)
+- GitHub Actions (5 workflows)
 - Pull Request Automation
 - Lighthouse CI
 - Conventional Commits enforcement
