@@ -1,0 +1,21 @@
+frontend:
+  - app/**
+  - components/**
+  - lib/**
+  - public/**
+tests:
+  - tests/**
+  - "**/*.test.ts"
+  - "**/*.test.tsx"
+docs:
+  - README.md
+  - CLAUDE.md
+  - AGENTS.md
+  - CONTRIBUTING.md
+  - .github/**/*.md
+config:
+  - "*.config.*"
+  - "*.json"
+  - .github/workflows/**
+examples:
+  - app/examples/**

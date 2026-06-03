@@ -1,0 +1,20 @@
+module.exports = {
+  ci: {
+    collect: {
+      startServerCommand: "npx next start --port 3000",
+      url: ["http://localhost:3000"],
+      numberOfRuns: 3,
+    },
+    upload: {
+      target: "temporary-public-storage",
+    },
+    assert: {
+      assertions: {
+        "categories:performance": ["warn", { minScore: 0.7 }],
+        "categories:accessibility": ["error", { minScore: 0.9 }],
+        "categories:best-practices": ["warn", { minScore: 0.8 }],
+        "categories:seo": ["warn", { minScore: 0.8 }],
+      },
+    },
+  },
+};

@@ -10,9 +10,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { CodeEditor } from "@/app/components/code-editor";
+import { ExamplePicker } from "@/app/components/example-picker";
+import { ReviewHistory, useReviewHistory } from "@/app/components/review-history";
+import { Mounted } from "@/app/components/mounted";
 
 const sampleCode = `export function BadButton() {
   return (
@@ -26,6 +29,7 @@ export default function Home() {
   const [code, setCode] = useState<string>(sampleCode);
   const [result, setResult] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { addRecord } = useReviewHistory();
 
   const reviewCode = useCallback(async (): Promise<void> => {
     setIsLoading(true);
@@ -48,14 +52,14 @@ export default function Home() {
 
       const data = JSON.parse(text);
       setResult(data.result);
+      addRecord(code, data.result);
     } catch (error) {
-      setResult(
-        error instanceof Error ? `Error: ${error.message}` : "Unknown error",
-      );
+      const message = error instanceof Error ? error.message : "Unknown error";
+      setResult(`Error: ${message}`);
     } finally {
       setIsLoading(false);
     }
-  }, [code]);
+  }, [code, addRecord]);
 
   return (
     <main className="min-h-screen bg-background">
@@ -98,18 +102,22 @@ export default function Home() {
                 </CardDescription>
               </div>
 
-              <Button variant="outline" onClick={() => setCode(sampleCode)}>
-                Load demo
+              <Button variant="outline" size="sm" onClick={() => setCode(sampleCode)}>
+                Reset demo
               </Button>
             </CardHeader>
 
             <CardContent className="space-y-4">
-              <Textarea
-                className="min-h-50 resize-none font-mono text-sm"
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                placeholder="Paste your React component here..."
-              />
+              <Mounted>
+                <CodeEditor
+                  value={code}
+                  onChange={setCode}
+                  placeholder="Paste your React component here..."
+                  className="min-h-[280px]"
+                />
+              </Mounted>
+
+              <ExamplePicker onSelect={setCode} />
 
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm text-muted-foreground">
@@ -162,6 +170,13 @@ export default function Home() {
                 AI-assisted code review UX.
               </AlertDescription>
             </Alert>
+
+            <ReviewHistory
+              onSelect={(record) => {
+                setCode(record.codePreview);
+                setResult(record.result);
+              }}
+            />
           </aside>
         </section>
 
