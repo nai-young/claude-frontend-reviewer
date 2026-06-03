@@ -93,9 +93,10 @@ Trigger a review by commenting on any Pull Request:
 
 A complete Claude-assisted workflow can be seen in:
 
-- [Pull Request #3 — Full workflow demo](https://github.com/nai-young/claude-frontend-reviewer/pull/3)
+- [Pull Request #7 — Before: AI review of flawed component](https://github.com/nai-young/claude-frontend-reviewer/pull/7)
+- [Pull Request #8 — After: fixes based on Claude's review](https://github.com/nai-young/claude-frontend-reviewer/pull/8)
 
-This PR demonstrates the entire feature set:
+### The Workflow
 
 1. **PR Labeler** — Auto-assigned labels based on changed files
 2. **Conventional Commits** — Validated PR title (`feat: ...`)
@@ -104,12 +105,13 @@ This PR demonstrates the entire feature set:
 5. **CI checks** — Typecheck, lint, tests, build
 6. **Lighthouse CI** — Performance and accessibility scoring
 7. **CODEOWNERS** — Review assignment
+8. **Follow-up PR** — Fixes applied based on AI review feedback
 
 This demonstrates how Claude can be integrated into day-to-day engineering processes rather than being used solely for code generation.
 
-### Previous Example
+### Earlier Example
 
-- [Pull Request #2 — Initial Claude review](https://github.com/nai-young/claude-frontend-reviewer/pull/2)
+- [Pull Request #2 — Initial Claude review (bad-button)](https://github.com/nai-young/claude-frontend-reviewer/pull/2)
 
 ---
 
