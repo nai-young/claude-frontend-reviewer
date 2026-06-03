@@ -26,7 +26,9 @@ describe("UserCard (fixed)", () => {
 
   it("uses semantic button for delete action", () => {
     render(<UserCard data={mockData} />);
-    const deleteButton = screen.getByRole("button", { name: /delete user alice/i });
+    const deleteButton = screen.getByRole("button", {
+      name: /delete user alice/i,
+    });
     expect(deleteButton).toBeInTheDocument();
   });
 
@@ -35,7 +37,9 @@ describe("UserCard (fixed)", () => {
     window.confirm = vi.fn(() => true);
 
     render(<UserCard data={mockData} onDelete={onDelete} />);
-    const deleteButton = screen.getByRole("button", { name: /delete user alice/i });
+    const deleteButton = screen.getByRole("button", {
+      name: /delete user alice/i,
+    });
     fireEvent.click(deleteButton);
 
     expect(onDelete).toHaveBeenCalledWith("1");

@@ -70,7 +70,6 @@ All skills are located in `.claude/skills/` and ready to use with Claude Code.
 | **PR Labeler**           | PR opened/edited    | Auto-assign labels based on changed files                   |
 | **Conventional Commits** | PR opened/edited    | Validate PR title follows Conventional Commits              |
 | **Lighthouse CI**        | PR / push to `main` | Performance, accessibility, best-practices, and SEO scoring |
-| **Deploy Preview**       | PR opened           | Post Vercel preview URL as PR comment                       |
 
 ### AI Review Examples
 
@@ -94,18 +93,23 @@ Trigger a review by commenting on any Pull Request:
 
 A complete Claude-assisted workflow can be seen in:
 
-- [Pull Request #2 — Claude-assisted review](https://github.com/nai-young/claude-frontend-reviewer/pull/2)
+- [Pull Request #3 — Full workflow demo](https://github.com/nai-young/claude-frontend-reviewer/pull/3)
 
-The workflow includes:
+This PR demonstrates the entire feature set:
 
-1. Code changes
-2. Pull Request creation
-3. AI-assisted review
-4. Accessibility recommendations
-5. Code improvements
-6. Merge-ready implementation
+1. **PR Labeler** — Auto-assigned labels based on changed files
+2. **Conventional Commits** — Validated PR title (`feat: ...`)
+3. **Claude Code review** — `@claude review app/examples/user-card.tsx`
+4. **AI suggestions** — Accessibility, performance, TypeScript fixes
+5. **CI checks** — Typecheck, lint, tests, build
+6. **Lighthouse CI** — Performance and accessibility scoring
+7. **CODEOWNERS** — Review assignment
 
 This demonstrates how Claude can be integrated into day-to-day engineering processes rather than being used solely for code generation.
+
+### Previous Example
+
+- [Pull Request #2 — Initial Claude review](https://github.com/nai-young/claude-frontend-reviewer/pull/2)
 
 ---
 
@@ -175,7 +179,7 @@ The frontend is a fully functional review dashboard:
 
 ### DevOps & Quality
 
-- GitHub Actions (6 workflows)
+- GitHub Actions (5 workflows)
 - Pull Request Automation
 - Lighthouse CI
 - Conventional Commits enforcement
