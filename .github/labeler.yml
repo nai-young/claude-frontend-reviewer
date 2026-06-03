@@ -1,0 +1,35 @@
+frontend:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'app/**'
+          - 'components/**'
+          - 'lib/**'
+          - 'public/**'
+
+tests:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'tests/**'
+          - '**/*.test.ts'
+          - '**/*.test.tsx'
+
+docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'README.md'
+          - 'CLAUDE.md'
+          - 'AGENTS.md'
+          - 'CONTRIBUTING.md'
+          - '.github/**/*.md'
+
+config:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '*.config.*'
+          - '*.json'
+          - '.github/workflows/**'
+
+examples:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'app/examples/**'
