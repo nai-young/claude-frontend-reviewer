@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.100.1",
-    "@size-limit/preset-app": "^12.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.17.0",
@@ -30,6 +29,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@size-limit/file": "^12.1.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -41,6 +41,7 @@
     "eslint-config-next": "16.2.6",
     "jsdom": "^29.1.1",
     "playwright": "^1.60.0",
+    "size-limit": "^12.1.0",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.7"

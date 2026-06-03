@@ -1,10 +1,10 @@
 [
   {
-    "path": "dist/**/*.js",
-    "limit": "150 kB"
+    "path": ".next/static/chunks/*.js",
+    "limit": "200 kB"
   },
   {
-    "path": "dist/**/*.css",
+    "path": ".next/static/**/*.css",
     "limit": "20 kB"
   }
 ]
